@@ -1,0 +1,50 @@
+QUESTION : SUBTREE OF ANOTHER TREE . 
+
+Given the roots of two binary trees root and subRoot, return true if there is a subtree of root with the same structure and node values of subRoot and false otherwise.
+A subtree of a binary tree tree is a tree that consists of a node in tree and all of this node's descendants. The tree tree could also be considered as a subtree of itself.
+
+Example 1:
+Input: root = [3,4,5,1,2], subRoot = [4,1,2]
+Output: true
+
+Example 2:
+Input: root = [3,4,5,1,2,null,null,null,null,0], subRoot = [4,1,2]
+Output: false
+
+
+
+SOLUTION :
+
+
+class Solution {
+public:
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        if (root == NULL) {
+            return false;
+        }
+        if (subRoot == NULL) {
+            return true;
+        }
+        if (isSame(root, subRoot)) {
+            return true;
+        }
+        return isSubtree(root->left, subRoot) ||
+               isSubtree(root->right, subRoot);
+    }
+    bool isSame(TreeNode* r, TreeNode* s) {
+        if (r == NULL && s == NULL) {
+            return true;
+        }
+        if (r == NULL || s == NULL) {
+            return false;
+        }
+        if (r->val != s->val) {
+            return false;
+        }
+        return isSame(r->left, s->left) && isSame(r->right, s->right);
+    }
+};
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
